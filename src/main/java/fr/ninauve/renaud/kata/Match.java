@@ -2,17 +2,19 @@ package fr.ninauve.renaud.kata;
 
 // https://codingdojo.org/fr/kata/Tennis/
 public class Match {
-    private static final int POINTS_TO_WIN = 4;
+    private static final int MINIMUM_TO_WIN = 4;
     private static final int DIFFERENCE_TO_WIN = 2;
     private static final String[] POINTS = new String[]{"0", "15", "30", "40"};
-    private static final String EQUALITY_LT_3 = "%s - all";
-    private static final String EQUALITY_GE_3 = "deuce";
+    private static final String EQUALITY_BELLOW_WINNING = "%s - all";
+    private static final String EQUALITY_ABOVE_WINNING = "deuce";
     private static final String BASIC_SCORE = "%s - %s";
     private static final String SERVER_WINS = "server wins";
     private static final String RECEIVER_WINS = "receiver wins";
+    private static final String SERVER_ADVANTAGE = "advantage in";
+    private static final String RECEIVER_ADVANTAGE = "advantage out";
 
     public String score(int serverPoints, int receiverPoints) {
-        boolean enoughPointsToWin = serverPoints >= POINTS_TO_WIN || receiverPoints >= POINTS_TO_WIN;
+        boolean enoughPointsToWin = serverPoints >= MINIMUM_TO_WIN || receiverPoints >= MINIMUM_TO_WIN;
         if (enoughPointsToWin) {
             return enoughPointToWinScore(serverPoints, receiverPoints);
         }
@@ -21,17 +23,17 @@ public class Match {
 
     private String notEnoughPointToWin(int serverPoints, int receiverPoints) {
         if (serverPoints == receiverPoints) {
-            return equalityScore(serverPoints, receiverPoints);
+            return equalityScore(serverPoints);
         }
         return basicScore(serverPoints, receiverPoints);
     }
 
-    private String equalityScore(int serverPoints, int receiverPoints) {
-        if (serverPoints == 3 && receiverPoints == 3) {
-            return EQUALITY_GE_3;
+    private String equalityScore(int serverPoints) {
+        if (serverPoints >= MINIMUM_TO_WIN - 1) {
+            return EQUALITY_ABOVE_WINNING;
         }
         final String serverScore = POINTS[serverPoints];
-        return String.format(EQUALITY_LT_3, serverScore);
+        return String.format(EQUALITY_BELLOW_WINNING, serverScore);
     }
 
     private String basicScore(int serverPoints, int receiverPoints) {
@@ -46,9 +48,9 @@ public class Match {
             return winnerScore(serverPoints, receiverPoints);
         }
         if (serverPoints == receiverPoints) {
-            return equalityScore(serverPoints, receiverPoints);
+            return equalityScore(serverPoints);
         }
-        return null;
+        return serverPoints > receiverPoints ? SERVER_ADVANTAGE : RECEIVER_ADVANTAGE;
     }
 
     private String winnerScore(int serverPoints, int receiverPoints) {

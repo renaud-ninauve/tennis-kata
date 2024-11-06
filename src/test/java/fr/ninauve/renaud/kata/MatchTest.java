@@ -24,7 +24,13 @@ class MatchTest {
                 Arguments.of(0, 3, "0 - 40"),
                 Arguments.of(1, 2, "15 - 30"),
                 Arguments.of(4, 1, "server wins"),
-                Arguments.of(1, 4, "receiver wins")
+                Arguments.of(1, 4, "receiver wins"),
+                Arguments.of(4, 3, "advantage in"),
+                Arguments.of(3, 4, "advantage out"),
+                Arguments.of(7, 6, "advantage in"),
+                Arguments.of(6, 7, "advantage out"),
+                Arguments.of(7, 7, "deuce"),
+                Arguments.of(8, 6, "server wins")
         );
     }
 
