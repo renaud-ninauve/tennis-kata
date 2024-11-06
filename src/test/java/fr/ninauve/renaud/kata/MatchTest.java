@@ -22,7 +22,9 @@ class MatchTest {
                 Arguments.of(0, 1, "0 - 15"),
                 Arguments.of(0, 2, "0 - 30"),
                 Arguments.of(0, 3, "0 - 40"),
-                Arguments.of(1, 2, "15 - 30")
+                Arguments.of(1, 2, "15 - 30"),
+                Arguments.of(4, 1, "server wins"),
+                Arguments.of(1, 4, "receiver wins")
         );
     }
 
