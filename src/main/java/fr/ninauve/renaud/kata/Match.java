@@ -12,11 +12,14 @@ public class Match {
     private static final String RECEIVER_WINS = "receiver wins";
 
     public String score(int serverPoints, int receiverPoints) {
-        int difference = Math.abs(serverPoints - receiverPoints);
         boolean enoughPointsToWin = serverPoints >= POINTS_TO_WIN || receiverPoints >= POINTS_TO_WIN;
-        if (enoughPointsToWin && difference >= DIFFERENCE_TO_WIN) {
-            return winnerScore(serverPoints, receiverPoints);
+        if (enoughPointsToWin) {
+            return enoughPointToWinScore(serverPoints, receiverPoints);
         }
+        return notEnoughPointToWin(serverPoints, receiverPoints);
+    }
+
+    private String notEnoughPointToWin(int serverPoints, int receiverPoints) {
         if (serverPoints == receiverPoints) {
             return equalityScore(serverPoints, receiverPoints);
         }
@@ -35,6 +38,17 @@ public class Match {
         final String serverScore = POINTS[serverPoints];
         final String receiverScore = POINTS[receiverPoints];
         return String.format(BASIC_SCORE, serverScore, receiverScore);
+    }
+
+    private String enoughPointToWinScore(int serverPoints, int receiverPoints) {
+        int difference = Math.abs(serverPoints - receiverPoints);
+        if (difference >= DIFFERENCE_TO_WIN) {
+            return winnerScore(serverPoints, receiverPoints);
+        }
+        if (serverPoints == receiverPoints) {
+            return equalityScore(serverPoints, receiverPoints);
+        }
+        return null;
     }
 
     private String winnerScore(int serverPoints, int receiverPoints) {
