@@ -8,13 +8,21 @@ public class Match {
     private static final String BASIC_SCORE = "%s - %s";
 
     public String score(int serverPoints, int receiverPoints) {
+        if (serverPoints == receiverPoints) {
+            return equalityScore(serverPoints, receiverPoints);
+        }
+        return basicScore(serverPoints, receiverPoints);
+    }
+
+    private String equalityScore(int serverPoints, int receiverPoints) {
         if (serverPoints == 3 && receiverPoints == 3) {
             return EQUALITY_GE_3;
         }
-        if (serverPoints == receiverPoints) {
-            final String serverScore = POINTS[serverPoints];
-            return String.format(EQUALITY_LT_3, serverScore);
-        }
+        final String serverScore = POINTS[serverPoints];
+        return String.format(EQUALITY_LT_3, serverScore);
+    }
+
+    private String basicScore(int serverPoints, int receiverPoints) {
         final String serverScore = POINTS[serverPoints];
         final String receiverScore = POINTS[receiverPoints];
         return String.format(BASIC_SCORE, serverScore, receiverScore);
