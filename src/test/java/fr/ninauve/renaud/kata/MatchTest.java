@@ -15,7 +15,8 @@ class MatchTest {
                 Arguments.of(3, 3, "deuce"),
                 Arguments.of(0, 0, "0 - all"),
                 Arguments.of(1, 1, "15 - all"),
-                Arguments.of(2, 2, "30 - all")
+                Arguments.of(2, 2, "30 - all"),
+                Arguments.of(1, 0, "15 - 0")
         );
     }
 
