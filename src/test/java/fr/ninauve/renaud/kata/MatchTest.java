@@ -12,6 +12,7 @@ class MatchTest {
 
     static Stream<Arguments> score() {
         return Stream.of(
+                Arguments.of(0, 0, "0 - all"),
                 Arguments.of(3, 3, "deuce")
         );
     }

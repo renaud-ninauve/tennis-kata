@@ -3,7 +3,10 @@ package fr.ninauve.renaud.kata;
 // https://codingdojo.org/fr/kata/Tennis/
 public class Match {
 
-    public String score(int nbPoints1, int nbPoints2) {
-        return nbPoints1 == 3 && nbPoints2 == 3 ? "deuce": null;
+    public String score(int serverPoints, int receiverPoints) {
+        if (serverPoints == 0 && receiverPoints == 0) {
+            return "0 - all";
+        }
+        return serverPoints == 3 && receiverPoints == 3 ? "deuce": null;
     }
 }
