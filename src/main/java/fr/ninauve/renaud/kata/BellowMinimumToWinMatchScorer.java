@@ -10,12 +10,12 @@ public class BellowMinimumToWinMatchScorer implements MatchScorer {
     @Override
     public String score(int serverPoints, int receiverPoints) {
         if (serverPoints == receiverPoints) {
-            return equalityScore(serverPoints);
+            return equality(serverPoints);
         }
-        return basicScore(serverPoints, receiverPoints);
+        return basic(serverPoints, receiverPoints);
     }
 
-    private String equalityScore(int serverPoints) {
+    private String equality(int serverPoints) {
         if (serverPoints >= MINIMUM_TO_WIN - 1) {
             return AboveMinimumToWinMatchScorer.EQUALITY;
         }
@@ -23,7 +23,7 @@ public class BellowMinimumToWinMatchScorer implements MatchScorer {
         return String.format(EQUALITY_BELLOW_WINNING, serverScore);
     }
 
-    private String basicScore(int serverPoints, int receiverPoints) {
+    private String basic(int serverPoints, int receiverPoints) {
         final String serverScore = POINTS[serverPoints];
         final String receiverScore = POINTS[receiverPoints];
         return String.format(BASIC_SCORE, serverScore, receiverScore);
