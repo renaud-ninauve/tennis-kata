@@ -2,11 +2,18 @@ package fr.ninauve.renaud.kata;
 
 // https://codingdojo.org/fr/kata/Tennis/
 public class Match {
+    private final String[] POINTS = new String[]{"0", "15", "30", "40"};
+    private final String EQUALITY_LT_3 = "%s - all";
+    private final String EQUALITY_GE_3 = "deuce";
 
     public String score(int serverPoints, int receiverPoints) {
-        if (serverPoints == 0 && receiverPoints == 0) {
-            return "0 - all";
+        if (serverPoints == 3 && receiverPoints == 3) {
+            return EQUALITY_GE_3;
         }
-        return serverPoints == 3 && receiverPoints == 3 ? "deuce": null;
+        if (serverPoints == receiverPoints) {
+            final String points = POINTS[serverPoints];
+            return String.format(EQUALITY_LT_3, points);
+        }
+        return null;
     }
 }
